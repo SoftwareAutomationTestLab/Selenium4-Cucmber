@@ -1,8 +1,19 @@
 name: test
 on: workflow_dispatch
 jobs:
-   job1: 
-    runs-on:ubuntu_latest
-    defaults:
-     run:
-   
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+    - name: docker
+      run: docker-compose -f "docker-compose.yml" up -d
+      
+    
